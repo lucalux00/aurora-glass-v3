@@ -8,8 +8,8 @@
 
 A single custom card that turns a Home Assistant dashboard into a living scene: the sky, sun, moon and the windows of the little house follow the real time of day, ten animated "worlds", eleven weather effects, buttons made of images and GIFs, alarm, climate, cameras and an energy view that shows costs in euro (or any currency) from your own tariff.
 
-- **Live demo (no install):** https://domotikpro.it/aurora-glass-v3-demo/index.html
-- **Full illustrated guide (Italian):** https://domotikpro.it/progetti/aurora-glass-v3
+- **Live demo (no install):** [try it in your browser](https://domotikpro.it/aurora-glass-v3-demo/index.html?utm_source=github&utm_medium=readme&utm_campaign=aurora-glass-v3&utm_content=demo)
+- **Full illustrated guide (Italian):** [domotikpro.it/progetti/aurora-glass-v3](https://domotikpro.it/progetti/aurora-glass-v3?utm_source=github&utm_medium=readme&utm_campaign=aurora-glass-v3&utm_content=guide)
 - **Video walkthrough (Italian):** https://www.youtube.com/@domotikproit
 
 | Tablet | Energy | Mobile |
@@ -57,4 +57,4 @@ Version 3, tested on Home Assistant 2026.9 by the author. Issues and suggestions
 The name "Aurora Glass" and the DomotikPro.it brand are not covered by the license: a modified version must use a different name.
 
 ---
-Made by [DomotikPro.it](https://domotikpro.it) — practical guides for a reliable smart home.
+Made by [DomotikPro.it](https://domotikpro.it?utm_source=github&utm_medium=readme&utm_campaign=aurora-glass-v3&utm_content=footer) — practical guides for a reliable smart home.

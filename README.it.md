@@ -8,8 +8,8 @@
 
 Una sola scheda personalizzata che trasforma la plancia di Home Assistant in una scena viva: cielo, sole, luna e finestre della casetta seguono l'ora reale. Dieci mondi animati, undici effetti meteo, pulsanti fatti di immagini e GIF, allarme, clima, telecamere ed energia con i costi in euro calcolati sulla tua tariffa.
 
-- **Demo dal vivo (senza installare nulla):** https://domotikpro.it/aurora-glass-v3-demo/index.html
-- **Guida completa con schermate:** https://domotikpro.it/progetti/aurora-glass-v3
+- **Demo dal vivo (senza installare nulla):** [provala nel browser](https://domotikpro.it/aurora-glass-v3-demo/index.html?utm_source=github&utm_medium=readme&utm_campaign=aurora-glass-v3&utm_content=demo)
+- **Guida completa con schermate:** [domotikpro.it/progetti/aurora-glass-v3](https://domotikpro.it/progetti/aurora-glass-v3?utm_source=github&utm_medium=readme&utm_campaign=aurora-glass-v3&utm_content=guide)
 - **Video passo passo:** https://www.youtube.com/@domotikproit
 
 | Tablet | Energia | Telefono |
@@ -57,4 +57,4 @@ Versione 3, provata dall'autore su Home Assistant 2026.9. Segnalazioni e suggeri
 Il nome "Aurora Glass" e il marchio DomotikPro.it non rientrano nella licenza: una versione modificata deve usare un nome diverso.
 
 ---
-Realizzato da [DomotikPro.it](https://domotikpro.it) — guide pratiche per una casa smart affidabile.
+Realizzato da [DomotikPro.it](https://domotikpro.it?utm_source=github&utm_medium=readme&utm_campaign=aurora-glass-v3&utm_content=footer) — guide pratiche per una casa smart affidabile.
