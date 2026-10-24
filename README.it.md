@@ -2,6 +2,8 @@
 
 🇬🇧 [Read in English](README.md)
 
+> **Novità: [Aurora Glass con procedura guidata](https://github.com/lucalux00/aurora-glass)** — si installa da HACS come integrazione: trova le tue stanze, ti fa scegliere i nomi e aggiunge la plancia alla barra laterale, in italiano o in inglese. Questo repository resta per l'installazione a mano con YAML.
+
 ![Aurora Glass v3](docs/dashboard-casa-notte-intera.webp)
 
 Una sola scheda personalizzata che trasforma la plancia di Home Assistant in una scena viva: cielo, sole, luna e finestre della casetta seguono l'ora reale. Dieci mondi animati, undici effetti meteo, pulsanti fatti di immagini e GIF, allarme, clima, telecamere ed energia con i costi in euro calcolati sulla tua tariffa.

@@ -2,6 +2,8 @@
 
 🇮🇹 [Leggi in italiano](README.it.md)
 
+> **New: [Aurora Glass with a setup wizard](https://github.com/lucalux00/aurora-glass)** — install it from HACS as an integration: it finds your rooms, lets you name them, adds the dashboard to the sidebar, in English or Italian. This repository stays available for the manual YAML install.
+
 ![Aurora Glass v3](docs/dashboard-casa-notte-intera.webp)
 
 A single custom card that turns a Home Assistant dashboard into a living scene: the sky, sun, moon and the windows of the little house follow the real time of day, ten animated "worlds", eleven weather effects, buttons made of images and GIFs, alarm, climate, cameras and an energy view that shows costs in euro (or any currency) from your own tariff.
