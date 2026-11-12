@@ -51,6 +51,14 @@ Delete the dashboard, the resource and the folder `www/aurora-v3`. Nothing else 
 ## Status
 Version 3, tested on Home Assistant 2026.9 by the author. Issues and suggestions are welcome — please open an issue.
 
+## Support Aurora Glass
+Aurora Glass is free and will stay free. I build it in my spare time and test every release on my own Home Assistant. If it is useful to you:
+
+- ⭐ **Star this repository**: it is free and helps other people find it.
+- ☕ **[Buy me a coffee on Ko-fi](https://ko-fi.com/domotikpro)**: one-time or monthly, by card or PayPal.
+
+Contributions are voluntary: Aurora Glass is the same for everyone.
+
 ## License
 [GPL-3.0](LICENSE). You can use, study, modify and share the card, also commercially, as long as every modified version you distribute stays under GPL-3.0, comes with its source code and keeps the original notice: © 2026 DomotikPro.it (Luca Pinelli).
 
