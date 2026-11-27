@@ -903,7 +903,7 @@
         if (i.dataset.hy) return;
         var n = null; i.classList.forEach(function (c) { if (!n && /^mdi-/.test(c)) n = c.slice(4); });
         if (!n) return;
-        i.dataset.hy = "1"; i.innerHTML = '<ha-icon icon="mdi:' + n + '"></ha-icon>';
+        i.dataset.hy = "1"; var hi = document.createElement("ha-icon"); hi.setAttribute("icon", "mdi:" + n); i.textContent = ""; i.appendChild(hi);
       });
     }
     function setIco(node, name) {
@@ -912,6 +912,7 @@
       if (HA) { var h = $("ha-icon", node); if (!h) { node.classList.add("mdi"); node.innerHTML = "<ha-icon></ha-icon>"; node.dataset.hy = "1"; h = $("ha-icon", node); } h.setAttribute("icon", "mdi:" + name); }
       else node.className = "mdi mdi-" + name + (node.classList.contains("bolt") ? " bolt" : "");
     }
+    function esc(v) { return String(v === null || v === undefined ? "" : v).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
     function el(tag, cls, html, attrs) { var e = document.createElement(tag); if (cls) e.className = cls; if (html) { e.innerHTML = html; hydrate(e); } if (attrs) Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); }); return e; }
     var PEN = '<span class="edit-badge"><i class="mdi mdi-pencil"></i></span>';
 
@@ -1046,7 +1047,7 @@
     function buildScenes() {
       var box = $("#scenes");
       SCENES.forEach(function (sc) {
-        var b = el("button", "scene", '<img class="s-img" alt="" draggable="false"><span class="s-ico"><i class="mdi ' + sc.ic + '"></i></span><span><b>' + sc.n + "</b><small>" + sc.sub + "</small></span>" + PEN, { type: "button", "data-scene": sc.id, "data-img": sc.img, "data-label": "Scena " + sc.n, "data-on": "0" });
+        var b = el("button", "scene", '<img class="s-img" alt="" draggable="false"><span class="s-ico"><i class="mdi ' + esc(sc.ic) + '"></i></span><span><b>' + esc(sc.n) + "</b><small>" + esc(sc.sub) + "</small></span>" + PEN, { type: "button", "data-scene": sc.id, "data-img": sc.img, "data-label": "Scena " + sc.n, "data-on": "0" });
         b.style.setProperty("--s1", sc.s1); b.style.setProperty("--s2", sc.s2);
         b.addEventListener("mouseenter", function () { b.dataset.on = "1"; refreshImg(b); });
         b.addEventListener("mouseleave", function () { b.dataset.on = state.scene === sc.id ? "1" : "0"; refreshImg(b); });
@@ -1058,12 +1059,12 @@
     function hasMotion(k) { return !LIVE || (ENT.motion[k] && ENT.motion[k].length); }
     function sensChip(k) {
       var label = motionLabel(k);
-      return '<span class="sens" data-sensor="' + k + '" data-img="sensore_movimento" data-ov="mov_' + k + '" data-label="Movimento ' + label + '" data-on="0"><span class="s-ph"><img class="s-img" alt="" draggable="false"></span><i class="mdi mdi-motion-sensor"></i>' + label + PEN + "</span>";
+      return '<span class="sens" data-sensor="' + esc(k) + '" data-img="sensore_movimento" data-ov="mov_' + esc(k) + '" data-label="Movimento ' + esc(label) + '" data-on="0"><span class="s-ph"><img class="s-img" alt="" draggable="false"></span><i class="mdi mdi-motion-sensor"></i>' + esc(label) + PEN + "</span>";
     }
     function openChip(id) {
       if (LIVE && !ENT.opens[id]) return "";
       var o = OPENS[id];
-      return '<span class="sens" data-op="' + id + '" data-img="' + o[1] + '" data-ov="op_' + id + '" data-label="' + o[0] + '" data-on="0"><span class="s-ph"><img class="s-img" alt="" draggable="false"></span><i class="mdi mdi-door-closed"></i>' + o[0] + PEN + "</span>";
+      return '<span class="sens" data-op="' + esc(id) + '" data-img="' + esc(o[1]) + '" data-ov="op_' + esc(id) + '" data-label="' + esc(o[0]) + '" data-on="0"><span class="s-ph"><img class="s-img" alt="" draggable="false"></span><i class="mdi mdi-door-closed"></i>' + esc(o[0]) + PEN + "</span>";
     }
     function longPress(node, fn) {
       var t = 0, fired = false;
@@ -1078,14 +1079,14 @@
         var orbs = "";
         r.l.forEach(function (k) {
           var L = LIGHTS[k];
-          orbs += '<button class="orb" type="button" data-light="' + k + '" data-img="' + L[1] + '"' + (L[3] ? ' data-ov="' + L[3] + '"' : "") + ' data-label="Luce ' + L[0].toLowerCase() + '" data-on="0" aria-pressed="false">' +
-            '<img class="o-img" alt="" draggable="false"><span class="o-shade"></span><span class="sw"></span><span class="o-ico"><i class="mdi ' + L[2] + '"></i></span>' +
-            '<span class="o-txt"><span class="o-name">' + L[0] + '</span><span class="o-state">Spenta</span></span>' + PEN + "</button>";
+          orbs += '<button class="orb" type="button" data-light="' + esc(k) + '" data-img="' + esc(L[1]) + '"' + (L[3] ? ' data-ov="' + esc(L[3]) + '"' : "") + ' data-label="Luce ' + esc(String(L[0]).toLowerCase()) + '" data-on="0" aria-pressed="false">' +
+            '<img class="o-img" alt="" draggable="false"><span class="o-shade"></span><span class="sw"></span><span class="o-ico"><i class="mdi ' + esc(L[2]) + '"></i></span>' +
+            '<span class="o-txt"><span class="o-name">' + esc(L[0]) + '</span><span class="o-state">Spenta</span></span>' + PEN + "</button>";
         });
         var chips = r.s.filter(hasMotion).map(sensChip).join("") + r.o.map(openChip).join("");
         var body = orbs;
         if (r.cell) body += '<div class="sens-cell sensors">' + chips + "</div>"; else if (chips) body += '<div class="sensors strip">' + chips + "</div>";
-        card.innerHTML = '<div class="room-head"><span class="r-ico"><i class="mdi ' + r.ic + '"></i></span><h3>' + r.n + '</h3><span class="count">0/' + r.l.length + '</span></div><div class="bar"><i></i></div><div class="room-body">' + body + "</div>";
+        card.innerHTML = '<div class="room-head"><span class="r-ico"><i class="mdi ' + esc(r.ic) + '"></i></span><h3>' + esc(r.n) + '</h3><span class="count">0/' + r.l.length + '</span></div><div class="bar"><i></i></div><div class="room-body">' + body + "</div>";
         hydrate(card);
         box.appendChild(card);
       });
@@ -1125,7 +1126,7 @@
       var ot = $("#open-tiles");
       Object.keys(OPENS).filter(function (id) { return !LIVE || ENT.opens[id]; }).forEach(function (id) {
         var o = OPENS[id];
-        var b = el("button", "stile", '<img class="st-img" alt="" draggable="false"><i class="mdi mdi-door-closed st-ico"></i><span class="st-txt"><span class="st-name">' + o[0] + '</span><span class="st-state">' + o[3] + "</span></span>" + PEN, { type: "button", "data-op": id, "data-img": o[1], "data-ov": "op_" + id, "data-label": o[0], "data-on": "0" });
+        var b = el("button", "stile", '<img class="st-img" alt="" draggable="false"><i class="mdi mdi-door-closed st-ico"></i><span class="st-txt"><span class="st-name">' + esc(o[0]) + '</span><span class="st-state">' + esc(o[3]) + "</span></span>" + PEN, { type: "button", "data-op": id, "data-img": o[1], "data-ov": "op_" + id, "data-label": o[0], "data-on": "0" });
         b.addEventListener("click", function () { onOpenTap(id); });
         ot.appendChild(b);
       });
@@ -1597,7 +1598,7 @@
       if (!list.length) { box.hidden = true; return; }
       list.forEach(function (c) {
         var card = el("article", "card cam",
-          '<div class="cam-head"><h4>' + c.n + '</h4><span class="cam-off" hidden>Offline</span><span class="cam-meta"></span>' +
+          '<div class="cam-head"><h4>' + esc(c.n) + '</h4><span class="cam-off" hidden>Offline</span><span class="cam-meta"></span>' +
           '<button class="cbtn" type="button" data-a="refresh" title="Aggiorna anteprima"><i class="mdi mdi-refresh"></i></button>' +
           (c.live ? '<button class="cbtn go" type="button" data-a="live"><i class="mdi mdi-play-circle"></i><span>Diretta</span></button>' : "") +
           '<button class="cbtn" type="button" data-a="open" title="Apri"><i class="mdi mdi-arrow-expand"></i></button></div>' +
@@ -1662,7 +1663,7 @@
       var sel = $(id), w = sel.closest("label");
       if (!list || !list.length) { w.hidden = true; return; }
       w.hidden = false; var sig = list.join("|");
-      if (sel.dataset.sig !== sig) { sel.innerHTML = list.map(function (k) { return '<option value="' + k + '">' + it(k) + "</option>"; }).join(""); sel.dataset.sig = sig; }
+      if (sel.dataset.sig !== sig) { sel.innerHTML = list.map(function (k) { return '<option value="' + esc(k) + '">' + esc(it(k)) + "</option>"; }).join(""); sel.dataset.sig = sig; }
       sel.value = cur;
     }
     function renderClima() {
@@ -1695,7 +1696,7 @@
       var fw = $("#cl-fans"), fsig = clima.fans.join("|") + "#" + clima.fan; $("#cl-fan-sec").hidden = !clima.fans.length;
       if (fw.dataset.sig !== fsig) {
         fw.dataset.sig = fsig; fw.innerHTML = "";
-        clima.fans.forEach(function (k) { fw.appendChild(el("button", "cchip sm", it(k), { type: "button", "data-fan": k, "aria-pressed": k === clima.fan ? "true" : "false" })); });
+        clima.fans.forEach(function (k) { fw.appendChild(el("button", "cchip sm", esc(it(k)), { type: "button", "data-fan": k, "aria-pressed": k === clima.fan ? "true" : "false" })); });
       }
       fillSel("#cl-swing", clima.swings, clima.swing); fillSel("#cl-hswing", clima.hswings, clima.hswing); fillSel("#cl-preset", clima.presets, clima.preset);
       $("#cl-minus").disabled = $("#cl-plus").disabled = !clima.avail;
@@ -1875,14 +1876,14 @@
       var other = Math.max(0, (m.power || 0) - sum), tot = Math.max(m.power || 0, sum, 1);
       var segs = apps.filter(function (x) { return x.w > 3; }).map(function (x) { return [x.n, x.c, x.w]; });
       if (other > 3) segs.push(["Altro (luci, standby…)", "#64748B", other]);
-      var sh = $("#en-share"), shHtml = segs.map(function (g2) { return '<i style="width:' + (g2[2] / tot * 100).toFixed(1) + "%;background:" + g2[1] + '"></i>'; }).join("");
+      var sh = $("#en-share"), shHtml = segs.map(function (g2) { return '<i style="width:' + (g2[2] / tot * 100).toFixed(1) + "%;background:" + esc(g2[1]) + '"></i>'; }).join("");
       if (sh.dataset.sig !== shHtml) { sh.dataset.sig = shHtml; sh.innerHTML = shHtml; }
       var lg = $("#en-share-legend");
       if (!lg) { lg = el("div", "share-legend"); lg.id = "en-share-legend"; sh.insertAdjacentElement("afterend", lg); }
-      lg.innerHTML = segs.map(function (g2) { return '<span style="--c:' + g2[1] + '">' + g2[0] + " <b>" + Math.round(g2[2]) + " W</b></span>"; }).join("") || '<span style="--c:#34D399">Nessun elettrodomestico acceso</span>';
+      lg.innerHTML = segs.map(function (g2) { return '<span style="--c:' + esc(g2[1]) + '">' + esc(g2[0]) + " <b>" + Math.round(g2[2]) + " W</b></span>"; }).join("") || '<span style="--c:#34D399">Nessun elettrodomestico acceso</span>';
       var ap = $("#en-apps"), ah = apps.map(function (x, i) {
         var run = x.w !== null && x.w >= 5;
-        return '<button class="app' + (run ? " run" : "") + (x.na ? " na" : "") + '" type="button" data-app="' + i + '" style="--c:' + x.c + '"><span class="a-ico"><i class="mdi ' + x.ic + '"></i></span><span class="a-name">' + x.n + '</span><span class="a-w">' + (x.na || x.w === null ? "—" : (x.w >= 1000 ? fmtW(x.w).n + " kW" : Math.round(x.w) + " W")) + '</span><span class="a-e">' + (x.e !== null ? fmtKwh(x.e) + " kWh oggi" : (x.na ? "Non disponibile" : "&nbsp;")) + "</span></button>";
+        return '<button class="app' + (run ? " run" : "") + (x.na ? " na" : "") + '" type="button" data-app="' + i + '" style="--c:' + esc(x.c) + '"><span class="a-ico"><i class="mdi ' + esc(x.ic) + '"></i></span><span class="a-name">' + esc(x.n) + '</span><span class="a-w">' + (x.na || x.w === null ? "—" : (x.w >= 1000 ? fmtW(x.w).n + " kW" : Math.round(x.w) + " W")) + '</span><span class="a-e">' + (x.e !== null ? fmtKwh(x.e) + " kWh oggi" : (x.na ? "Non disponibile" : "&nbsp;")) + "</span></button>";
       }).join("");
       if (ap.dataset.sig !== ah) { ap.dataset.sig = ah; ap.innerHTML = ah; hydrate(ap); $$(".app", ap).forEach(function (b) { b.addEventListener("click", function () { if (LIVE) moreInfo(ENT.energy.appliances[+b.dataset.app].p); }); }); }
     }
